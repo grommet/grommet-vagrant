@@ -14,5 +14,5 @@ chown vagrant:vagrant /home/vagrant/.npmrc
 PROFILE=/home/vagrant/.profile
 echo '# Setup node paths' >> $PROFILE
 echo 'export NODE_ROOT=$HOME/.npm-packages' >> $PROFILE
-echo 'export NODE_PATH=$NODE_ROOT/lib/node_modules' >> $PROFILE
+echo 'export NODE_PATH=$NODE_ROOT/lib/node_modules:$NODE_PATH' >> $PROFILE
 echo 'export PATH=$NODE_ROOT/bin:$PATH' >> $PROFILE
