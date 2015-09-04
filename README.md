@@ -45,7 +45,7 @@ to your gulpfile and rerun gulp dev.
 # Windows users
 If you are on windows you will likely have to deal with long path issues with your node_modules dependencies. This is because you are running off of the windows file system and some versions of vagrant and VirtualBox do not support UNC paths.
 
-The 4.x series of VirtualBox and vagrant 1.7.3 work together and allow long UNC file paths. Other versions may work as well.
+The 4.x series of VirtualBox and Vagrant 1.7.3 work together and allow long UNC file paths. Other versions may work as well. Vagrant 1.7.3 and the VirtualBox 5.0.0 do not work together.
 
 The error looks something like this where example is the name of the project/directory.
 ```
