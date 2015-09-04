@@ -21,10 +21,14 @@ After that install [vagrant-proxy](http://tmatilai.github.io/vagrant-proxyconf/)
 
 # Forwarded ports
 By default ports 8002, 8080, and 9000 are forwarded. That means you can hit localhost:${port} from your host and go to the VM.
-Adding a port is as easy as adding this line to your Vagrantfile
+Adding a port is as easy as adding this line to your Vagrantfile. 
 ```
 config.vm.network "forwarded_port", guest: 9999, host: 9999, auto_correct: true
 ```
+For changes to take effect you will have to restart the VM at minimum, or run `vagrant reload --no-provision` which will shutdown the vm, restart it, and apply the network settings again. 
+
+If you don't want to restart you can add the port forwarding in the settings, network, port forwarding section of the VM config in VirtualBox.
+
 Note that if there is a port collision that Vagrant will automatically pick a different port for you, so you might goto localhost:2201 instead of 3000 to hit port 3000 on your VM.
 
 If when running gulp you cannot connect via your host check that gulp is running on all host devices.
