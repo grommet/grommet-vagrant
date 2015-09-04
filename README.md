@@ -20,10 +20,25 @@ In order to build and download boxes with vagrant you will need `http_proxy` and
 After that install [vagrant-proxy](http://tmatilai.github.io/vagrant-proxyconf/). This tool updates your vagrant box with the appropriate proxy information for various tools (including git and npm). If you've already provisioned a box, you'll have to reprovision `vagrant provision` to get the vagrant-proxy to be good again.
 
 # Windows users
-If you are on windows you will likely have to deal with long path issues with your node_modules dependencies. 
+If you are on windows you will likely have to deal with long path issues with your node_modules dependencies. This is because you are running off of the windows file system and merely mounting it in the linux VM.
+
+The error looks something like this where example is the name of the project/directory.
+```
+npm ERR! path /host/test/example/node_modules/gulp-rsync/node_modules/lodash.every/node_modules/lodash.forown/node_modules/lodash._basecreatecallback/node_modules/lodash.bind/node_modules/lodash._createwrapper/node_modules/lodash.isfunction/package.json.fbd4e42661f43af1c9f92cbf58aa0816
+npm ERR! code EPERM
+npm ERR! errno -1
+
+npm ERR! Error: EPERM, open '/host/test/example/node_modules/gulp-rsync/node_modules/lodash.every/node_modules/lodash.forown/node_modules/lodash._basecreatecallback/node_modules/lodash.bind/node_modules/lodash._createwrapper/node_modules/lodash.isfunction/package.json.fbd4e42661f43af1c9f92cbf58aa0816'
+npm ERR!     at Error (native)
+npm ERR!  { [Error: EPERM, open '/host/test/example/node_modules/gulp-rsync/node_modules/lodash.every/node_modules/lodash.forown/node_modules/lodash._basecreatecallback/node_modules/lodash.bind/node_modules/lodash._createwrapper/node_modules/lodash.isfunction/package.json.fbd4e42661f43af1c9f92cbf58aa0816']
+npm ERR!   errno: -1,
+npm ERR!   code: 'EPERM',
+npm ERR!   path: '/host/test/example/node_modules/gulp-rsync/node_modules/lodash.every/node_modules/lodash.forown/node_modules/lodash._basecreatecallback/node_modules/lodash.bind/node_modules/lodash._createwrapper/node_modules/lodash.isfunction/package.json.fbd4e42661f43af1c9f92cbf58aa0816' }
+```
+
 As of 2015-09-04 there are no great solutions. 
 
-## On the edge
+## Windows: On the max-path length edge
 If you are just over the edge of the 256 character limit, you can mount a different path and have your source code at a lower starting number of characters (say C:/dev/).
 
 Simply add something like the below to your Vagrantfile
@@ -31,7 +46,10 @@ Simply add something like the below to your Vagrantfile
  config.vm.synced_folder "C:/dev", "/vagrant_data"
 ```
 
+## Windows: On the max-path length edge 2
+You can also shorten the path by installing the same version. In the above gulp-rsync has a deeply nested path, if you are close you can add lodash.every to your dependency list with the same version string as in gulp-rsync's package.json. You will need to install the package `npm install -g <package>`  to look at the package.json. You should use the same version as in your package.json. If you are doing this you probably want to use a static version string.
+
 ## Using npm version 3
-Most promising long-term solution is running `npm@3.x` since it flattens the node_modules hierarchy. However there are still blocking issues dealing with call stack issues. 
+This is the most promising long-term solution is running `npm@3.x` since it flattens the node_modules hierarchy. However there are still blocking issues in `npm@3.x` preventing it from being `npm@latest`. 
 You can install it with `npm install -g npm@3.x-latest` then run `hash -d npm` to reset bash's cached path to npm (you could also just logout and back in).
 
