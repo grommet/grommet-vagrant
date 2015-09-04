@@ -27,9 +27,9 @@ Vagrant.configure(2) do |config|
   # Some default ports setup to forward, will automatically pick another port if already consumed
   # config.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
   # config.vm.network "forwarded_port", guest: 8001, host: 8001, auto_correct: true
-  # config.vm.network "forwarded_port", guest: 8002, host: 8002, auto_correct: true
-  # config.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct: true
-  # config.vm.network "forwarded_port", guest: 9000, host: 9000, auto_correct: true
+  config.vm.network "forwarded_port", guest: 8002, host: 8002, auto_correct: true
+  config.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct: true
+  config.vm.network "forwarded_port", guest: 9000, host: 9000, auto_correct: true
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
