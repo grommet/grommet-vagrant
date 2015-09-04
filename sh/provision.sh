@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Exit if any command returns non zero
+set -e
+
 if [ -e "/etc/vagrant-provisioned" ];
 then
     echo "Vagrant provisioning already completed. Skipping..."
@@ -18,31 +21,15 @@ hostname vagrant-grommet
 
 # Install core components
 /vagrant/sh/core.sh
-LAST=$?
-if [ $LAST -ne 0 ] ; then
-  exit LAST
-fi
 
 # Install Node.js
 /vagrant/sh/nodejs.sh
-LAST=$?
-if [ $LAST -ne 0 ] ; then
-  exit LAST
-fi
 
 # Install scss_lint
 /vagrant/sh/scss_lint.sh
-LAST=$?
-if [ $LAST -ne 0 ] ; then
-  exit LAST
-fi
 
 # cleanup apt
 /vagrant/sh/cleanup_apt.sh
-LAST=$?
-if [ $LAST -ne 0 ] ; then
-  exit LAST
-fi
 
 #Done provisioning
 touch /etc/vagrant-provisioned

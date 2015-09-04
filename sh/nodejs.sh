@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 # Install node.js v0.12
 curl -sL https://deb.nodesource.com/setup_0.12 | bash -
 # Above command runs apt-get update

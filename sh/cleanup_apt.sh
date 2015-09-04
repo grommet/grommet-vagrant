@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Clean up APT
 apt-get clean
