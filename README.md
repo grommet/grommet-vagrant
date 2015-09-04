@@ -53,3 +53,23 @@ You can also shorten the path by installing the same version. In the above gulp-
 This is the most promising long-term solution is running `npm@3.x` since it flattens the node_modules hierarchy. However there are still blocking issues in `npm@3.x` preventing it from being `npm@latest`. 
 You can install it with `npm install -g npm@3.x-latest` then run `hash -d npm` to reset bash's cached path to npm (you could also just logout and back in).
 
+
+# Open issues
+
+## Polling uses too many CPU cycles
+The webpack/watchpack plugin poll node_modules unnecessarily causing lots of CPU cycles. 
+
+What does this mean? It means if you are editing your source files from the host machine that you won't see webpack automatically rebuild the UI.
+
+To see this you had to add 
+```
+watchOptions: {
+  poll: true
+}
+```
+to your `gulpfile.js` in your project.
+
+### workarounds for polling
+* Don't turn polling on and simply touch a file from the VM in a watched directory when you want to force a rebuild.
+* Don't turn polling on and use rsync from host to client to sync files and force timestamp updates. You will want to run in a non-shared directory.
+* Leave polling on and deal with the High VM CPU usage
