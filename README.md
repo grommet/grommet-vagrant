@@ -1,6 +1,17 @@
 # vagrant-grommet
-A vagrant box to make developing with grommet easier. Built on 64bit ubuntu trusty.
+A Vagrant box to make developing with grommet easier. Built on 64bit ubuntu trusty.
 
+# Getting Started
+Install [Vagrant](https://www.vagrantup.com/)
+and [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+
+Clone this repository and run the following to start and build the box.
+```
+cd vagrant-grommet
+vagrant up
+vagrant ssh
+```
+To see ssh configuration to login from another terminal simply run `vagrant ssh-config`.
 
 # Proxy Setup
 If you are behind a proxy you will want to have your environment variables set appropriately.
