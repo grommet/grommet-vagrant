@@ -28,6 +28,9 @@ hostname vagrant-grommet
 # Install scss_lint
 /vagrant/sh/scss_lint.sh
 
+# Fix some environment things to make node happier
+/vagrant/sh/env_fixes.sh
+
 # cleanup apt
 /vagrant/sh/cleanup_apt.sh
 
