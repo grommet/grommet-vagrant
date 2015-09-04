@@ -19,6 +19,25 @@ In order to build and download boxes with vagrant you will need `http_proxy` and
 
 After that install [vagrant-proxy](http://tmatilai.github.io/vagrant-proxyconf/). This tool updates your vagrant box with the appropriate proxy information for various tools (including git and npm). If you've already provisioned a box, you'll have to reprovision `vagrant provision` to get the vagrant-proxy to be good again.
 
+# Forwarded ports
+By default ports 8002, 8080, and 9000 are forwarded. That means you can hit localhost:${port} from your host and go to the VM.
+Adding a port is as easy as adding this line to your Vagrantfile
+```
+config.vm.network "forwarded_port", guest: 9999, host: 9999, auto_correct: true
+```
+Note that if there is a port collision that Vagrant will automatically pick a different port for you, so you might goto localhost:2201 instead of 3000 to hit port 3000 on your VM.
+
+If when running gulp you cannot connect via your host check that gulp is running on all host devices.
+
+```
+netstat -an | grep ${port}
+```
+If you don't see  `0.0.0.0:${port}` then you will need to add
+```
+  devServerHost: '0.0.0.0',
+```
+to your gulpfile and rerun gulp dev.
+
 # Windows users
 If you are on windows you will likely have to deal with long path issues with your node_modules dependencies. This is because you are running off of the windows file system and merely mounting it in the linux VM.
 
