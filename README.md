@@ -1,4 +1,4 @@
-# vagrant-grommet
+# grommet-vagrant
 A Vagrant box to make developing with grommet easier. Built on 64bit ubuntu trusty.
 
 # Getting Started
